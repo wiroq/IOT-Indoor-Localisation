@@ -1,43 +1,58 @@
 /*
-    * @file utillities.h
-    * @brief Header file containing constants and structures for the localization system.
-    * 
-    * This file defines the number of anchors, locations, and a structure to hold RSSI values
-    * and their corresponding labels. It is used in the localization system to manage data.
-    *
-    * @date 2025-5-13
-    * @author Ward Iraqi
-*/
+ * @file utillities.h
+ * @brief Final version with only constants, enums, data structures, and API declarations.
+ */
 
-#ifndef _UTIILITIES_H_
-#define _UTIILITIES_H_
+#ifndef _UTILITIES_H_
+#define _UTILITIES_H_
 
+#include <vector>
+
+// =================== Constants ===================
 #define SCANS_PER_LOCATION (20)
-#define NUMBER_OF_SCANS (SCANS_PER_LOCATION * NUMBER_OF_LOCATIONS)
+#define SAMPLES_PER_SCAN (5)
+#define SCAN_DELAY_MS (150)
+#define ALPHA (0.7f)
+#define NUMBER_OF_ANCHORS (6)
+#define NUMBER_OF_EXTRA_APS (0)  // For techpublic
+#define TOTAL_APS (NUMBER_OF_ANCHORS + NUMBER_OF_EXTRA_APS)
+#define NUMBER_OF_LOCATIONS (12)  // 6 main locations + 6 near locations
 
-enum ANCHORS
-{
-    ANCHOR_1 = 0,
-    ANCHOR_2 = 1,
-    ANCHOR_3 = 2,
-    NUMBER_OF_ANCHORS = 3
+//Just for KNN use
+#define K (3)
+
+// =================== Enums ===================
+
+const char* anchorSSIDs[TOTAL_APS] = {
+        "ANCHOR_LOBBY",
+        "ANCHOR_PRINTER",
+        "ANCHOR_HALL_ENTRANCE",
+        "ANCHOR_SECOND_HALL_ENTRY", " ANCHOR_SECOND_HALL_MID ", "ANCHOR_SECOND_HALL_END",
 };
 
-enum LOCATIONS
-{
-    ROOM_1 = 0,
-    ROOM_2 = 1,
-    ROOM_3 = 2,
-    NEXT_TO_ROOM_1 = 3,
-    NEXT_TO_ROOM_2 = 4,
-    NEXT_TO_ROOM_3 = 5,
-    NUMBER_OF_LOCATIONS = 6
+enum LOCATIONS {
+    ROOM_201 = 0,
+    ROOM_231 = 1,
+    ROOM_236 = 2,
+    LOBBY = 3,
+    PRINTER_AREA = 4,
+    NEAR_ELEVATOR = 5,
+    NEAR_ROOM_201 = 6,
+    NEAR_ROOM_231 = 7,
+    NEAR_ROOM_236 = 8,
+    NEAR_LOBBY = 9,
+    NEAR_PRINTER_AREA = 10,
+    NEAR_ELEVATOR_AREA = 11
 };
 
-struct Data
-{
-    int RSSIs[NUMBER_OF_ANCHORS];
+// =================== Data Structures ===================
+
+struct Data {
+    int RSSIs[TOTAL_APS];
     LOCATIONS location;
 };
 
-#endif // _UTIILITIES_H_
+// =================== Data Set Vector ===================
+etl::vector<Data, NUMBER_OF_SCANS> dataSet;
+
+#endif // _UTILITIES_H_

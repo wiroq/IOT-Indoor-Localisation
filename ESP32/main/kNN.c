@@ -1,7 +1,4 @@
 #include "kNN.h"
-#include <math.h>
-
-#define K (3)
 
 static float euclidean(const int* a, const int* b, int size)
 {

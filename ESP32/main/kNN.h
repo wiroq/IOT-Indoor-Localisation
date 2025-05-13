@@ -10,8 +10,7 @@
 
 #include "utillities.h"
 #include "etl/vector.h"
-
-etl::vector<Data, NUMBER_OF_SCANS> dataSet;
+#include <math.h>
 
 /*
     * @param input: sample array of RSSI values
