@@ -1,9 +1,11 @@
+
 #include <Arduino.h>
-#include <WiFi.h>
 #include <vector>
+#include <WiFi.h>
+
 #include "utillities.h"
-#include "kNN.h"
 #include "scanning.h"
+#include "kNN.h"
 
 void confirmLocation(LOCATIONS predictedLocation) {
     Serial.print("Predicted Location: ");
@@ -44,7 +46,7 @@ void setup() {
             }
         }
 
-        performScan(selectedLocation, SCANS_PER_LOCATION, collectedData);
+        performScan(selectedLocation);
     }
 
     Serial.println("Data Collection Complete.");
@@ -60,7 +62,20 @@ void loop() {
         }
     }
 
+    int point[NUMBER_OF_ANCHORS] = {-1000, -1000, -1000, -1000, -1000, -1000}; 
+    int n = WiFi.scanNetworks();
+    for (int j = 0; j < n; ++j) {
+         String ssid = WiFi.SSID(j);
+         int rssi = WiFi.RSSI(j);
+
+        for (int k = 0; k < TOTAL_APS; ++k) {
+            if (ssid.equals(anchorSSIDs[k])) {
+                point[k] = rssi;
+            }
+         }
+    }
+
     // Predict location and confirm with user
-    LOCATIONS predictedLoc = static_cast<LOCATIONS>(KNNPredict(dataSet));
+    LOCATIONS predictedLoc = static_cast<LOCATIONS>(KNNPredict(point));
     confirmLocation(predictedLoc);
 }

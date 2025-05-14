@@ -8,12 +8,19 @@
     * The kNN algorithm is used for predicting the location based on RSSI values.
 */
 
+#ifndef IOT_INDOOR_LOCALISATION_kNN_H
+#define IOT_INDOOR_LOCALISATION_kNN_H
+
 #include "utillities.h"
-#include "etl/vector.h"
+#include <Arduino.h>
 #include <math.h>
+#include <vector>
+#include <WiFi.h>
 
 /*
     * @param input: sample array of RSSI values
     * @return: predicted location
 */
-LOCATIONS knnPredict(const int input[num_of_anchors]);
+LOCATIONS knnPredict(const int input[NUMBER_OF_ANCHORS]);
+
+#endif

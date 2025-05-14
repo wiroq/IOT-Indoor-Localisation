@@ -13,7 +13,7 @@ static float euclidean(const int* a, const int* b, int size)
 LOCATIONS knnPredict(const int input[NUMBER_OF_ANCHORS])
 {
     int sizeOfDataSet = dataSet.size();
-    float distances[NUMBER_OF_SCANS] = {0};
+    float distances[SCANS_PER_LOCATION] = {0};
     LOCATIONS locations[NUMBER_OF_SCANS] = {0};
 
     // Calculate distances and store corresponding location labels

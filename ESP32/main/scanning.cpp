@@ -20,7 +20,6 @@ void performScan(LOCATIONS locationLabel) {
 
                 for (int k = 0; k < TOTAL_APS; ++k) {
                     if (ssid.equals(anchorSSIDs[k])) {
-                        if (k == TECH_PUBLIC) rssi = (int)(rssi * 2); // Reduce techpublic influence
                         accumulatedRSSIs[k] = applyEMA(accumulatedRSSIs[k], rssi);
                     }
                 }

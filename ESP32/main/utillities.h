@@ -30,7 +30,7 @@ const char* anchorSSIDs[TOTAL_APS] = {
         "ANCHOR_SECOND_HALL_ENTRY", " ANCHOR_SECOND_HALL_MID ", "ANCHOR_SECOND_HALL_END",
 };
 
-enum LOCATIONS {
+typedef enum LOCATIONS {
     ROOM_201 = 0,
     ROOM_231 = 1,
     ROOM_236 = 2,
@@ -43,7 +43,8 @@ enum LOCATIONS {
     NEAR_LOBBY = 9,
     NEAR_PRINTER_AREA = 10,
     NEAR_ELEVATOR_AREA = 11
-};
+} LOCATIONS ;
+ 
 
 // =================== Data Structures ===================
 
@@ -53,6 +54,6 @@ struct Data {
 };
 
 // =================== Data Set Vector ===================
-etl::vector<Data, NUMBER_OF_SCANS> dataSet;
+std::vector<Data> dataSet;
 
 #endif // _UTILITIES_H_

@@ -5,10 +5,12 @@
 #ifndef IOT_INDOOR_LOCALISATION_SCANNING_H
 #define IOT_INDOOR_LOCALISATION_SCANNING_H
 
+#include <Arduino.h>
+#include <vector>
+#include <WiFi.h>
 #include "utillities.h"
 #include "scanning.h"
-#include <Arduino.h>
-#include <WiFi.h>
+
 
 /**
  * @brief Collects RSSI data for the specified location.
