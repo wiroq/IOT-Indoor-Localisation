@@ -1,19 +1,25 @@
-## XXXX Project by :  
+## XXXXX Project by :  
+  
+## Details about the project
  
-## details about our project :
- 
+## Folder description :
+* ESP32: source code for the esp side (firmware).
+* Documentation: wiring diagram + basic operating instructions
+* Unit Tests: tests for individual hardware components (input / output devices)
+* flutter_app : dart code for our Flutter app.
+* Parameters: contains description of parameters and settings that can be modified IN YOUR CODE
+* Assets: link to 3D printed parts, Audio files used in this project, Fritzing file for connection diagram (FZZ format) etc
+
+## ESP32 SDK version used in this project: 
+
+## Arduino/ESP32 libraries used in this project:
+* XXXX - version XXXXX
+* XXXX - version XXXXX
+* XXXX - version XXXXX
+
+## Connection diagram:
+
 ## Project Poster:
  
-## In this project git you will find these folders :
-#### - README file : this file :D
-#### - EspCode folder: in that folder you will find the source code we have built for the esp side (hardware).
-#### - How to run the system: wiring diagram + steps to run the system.
-#### - UNIT TESTS: contains tests we have does to validate how some hardware parts work.
-#### - flutter_app : dart code files for the flutter app.
-#### - StatesAndConfigirations: contains 2 files, one file is about configurable_parameters we used in the project code and another pdf file describing the different states in our system and how we move from one another, including how we handle errors.
-#### - link to app features&tests: https://drive.google.com/drive/folders/1LCiqWJl7VVG6eHTiEd6VVtLLuSFPIfDv
-
-## Arduino/ESP libraries installed for the project:
-* XXXX - version XXXXX
-* XXXX - version XXXXX
-* XXXX - version XXXXX
+This project is part of ICST - The Interdisciplinary Center for Smart Technologies, Taub Faculty of Computer Science, Technion
+https://icst.cs.technion.ac.il/
