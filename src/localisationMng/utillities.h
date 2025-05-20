@@ -23,6 +23,7 @@
 #define K (4)
 
 extern const char* anchorSSIDs[TOTAL_APS];
+#define SCAN_RESULTS_FILE     "/scan_results.csv"
 
 // =================== Enums ===================
 
@@ -54,6 +55,8 @@ typedef enum LOCATIONS {
 struct Data {
     int RSSIs[TOTAL_APS];
     LOCATIONS location;
+    int timestamp;
+
 };
 
 // =================== Data Set Vector ===================
