@@ -1,6 +1,6 @@
-#include "validationPhase.h"
+#include "predictionPhase.h"
 
-static float euclidean(const int* a, const int* b, int size)
+static double euclidean(const double* a, const double* b, int size)
 {
     int sum = 0;
     for (int i = 0; i < size; ++i)
@@ -10,11 +10,11 @@ static float euclidean(const int* a, const int* b, int size)
     return sqrt(sum);
 }
 
-LOCATIONS knnPredict(const int input[NUMBER_OF_ANCHORS])
+LOCATIONS knnPredict(const double input[NUMBER_OF_ANCHORS])
 {
     int sizeOfDataSet = dataSet.size();
-    float distances[NUMBER_OF_SCANS] = {0};
-    LOCATIONS locations[NUMBER_OF_SCANS];
+    vector<double> distances(sizeOfDataSet, 0);
+    vector<LOCATIONS> locations(sizeOfDataSet, NOT_ACCURATE);
 
     // Calculate distances and store corresponding location labels
     for (int i = 0 ; i < NUMBER_OF_SCANS ; ++i) {
@@ -30,7 +30,7 @@ LOCATIONS knnPredict(const int input[NUMBER_OF_ANCHORS])
             if (distances[j] < distances[j + 1])
             {
                 // Swap distances
-                float tempDist = distances[j];
+                double tempDist = distances[j];
                 distances[j] = distances[j + 1];
                 distances[j + 1] = tempDist;
 
@@ -65,4 +65,13 @@ LOCATIONS knnPredict(const int input[NUMBER_OF_ANCHORS])
     }
 
     return locationWithMaxVotes;
+}
+
+void preparePoint(double RSSIs[NUMBER_OF_ANCHORS])
+{
+    for (int i = 0; i < NUMBER_OF_ANCHORS; ++i)
+    {
+        // Normalize the RSSI values using min-max scaling
+        RSSIs[i] = (RSSIs[i] + 100) / 100.0;
+    }
 }

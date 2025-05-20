@@ -64,6 +64,7 @@ void performScan(LOCATIONS locationLabel) {
             scanData.RSSIs[j] = accumulatedRSSIs[j];
         }
 
+        preparePoint(scanData.RSSIs);
         dataSet.push_back(scanData);
     }
 }

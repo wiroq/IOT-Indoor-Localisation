@@ -2,9 +2,8 @@
 #include <Arduino.h>
 #include <vector>
 #include <WiFi.h>
-
 #include "../localisationMng/scanning.h"
-#include "../localisationMng/validationPhase.h"
+#include "../localisationMng/predictionPhase.h"
 
 std::vector<Data> dataSet;
 const char* anchorSSIDs[TOTAL_APS] = {
@@ -78,19 +77,20 @@ void loop() {
 
     int point[NUMBER_OF_ANCHORS] = {-100, -100, -100, -100, -100, -100, -100, -100, -100, -100}; 
     for (int sample = 0; sample < SAMPLES_PER_SCAN; ++sample) {
-    int n = WiFi.scanNetworks();
-    for (int j = 0; j < n; ++j) {
-         String ssid = WiFi.SSID(j);
-         int rssi = WiFi.RSSI(j);
-
-        for (int k = 0; k < TOTAL_APS; ++k) {
-            if (ssid.equals(anchorSSIDs[k])) {
-                point[k] = applyEMA(point[k], rssi);
+        int n = WiFi.scanNetworks();
+        for (int j = 0; j < n; ++j) {
+            String ssid = WiFi.SSID(j);
+            int rssi = WiFi.RSSI(j);
+            for (int k = 0; k < TOTAL_APS; ++k) {
+                if (ssid.equals(anchorSSIDs[k])) {
+                    point[k] = applyEMA(point[k], rssi);
+                }
             }
-         }
+        }
     }
 
     // Predict location and confirm with user
+    preparePoint(point);
     LOCATIONS predictedLoc = static_cast<LOCATIONS>(knnPredict(point));
     confirmLocation(predictedLoc);
 }
